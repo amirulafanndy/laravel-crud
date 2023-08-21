@@ -10,17 +10,18 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        $products = Product::latest()-paginate(5);
+        $products = Product::latest()->paginate(5);
 
-        return view('products.index', compact('products'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('products.index',compact('products'))
+                    ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
         return view('products.create');
     }
@@ -28,7 +29,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -43,7 +44,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product): View
+    public function show(Product $product)
     {
         return view('products.show', compact('product'));
     }
@@ -51,7 +52,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product): View
+    public function edit(Product $product)
     {
         return view('products.edit', compact('product'));
     }
@@ -59,7 +60,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product): RedirectResponse
+    public function update(Request $request, Product $product)
     {
         $request->validate([
             'name' => 'required',
@@ -74,7 +75,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product): RedirectResponse
+    public function destroy(Product $product)
     {
         $product->delete();
 
